@@ -59,7 +59,9 @@
 
 <script>
   //initial event listener
-  window.addEventListener("keydown", function(e) {
+  window.addEventListener("keydown", fireAudio);
+
+  function fireAudio(e) {
 
     console.log("Button pressed:", e.key, e.keyCode);
 
@@ -76,15 +78,14 @@
 
     //triggers initial transition on key press
     key.classList.add("playing");
-  });
+  };
 
   function removeTransition(e) {
 
     //narrows down transition to transform, so this does not fire for every individual transition
     if (e.propertyName != "transform") return;
     this.classList.remove("playing");
-    
-    console.log(this);
+
   }
 
   //adds event listener specifcailly for ends of transitions
