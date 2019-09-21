@@ -58,6 +58,38 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  //initial event listener
+  window.addEventListener("keydown", function(e) {
+
+    console.log("Button pressed:", e.key, e.keyCode);
+
+    //checks if button pressed has assigned audio element. Returns "null" if not.
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+    //stops function if no attached audio element
+    if (!audio) return;
+
+    //Resets audio cue if already playing. Plays audio cue.
+    audio.currentTime=0;
+    audio.play();
+
+    //triggers initial transition on key press
+    key.classList.add("playing");
+  });
+
+  function removeTransition(e) {
+
+    //narrows down transition to transform, so this does not fire for every individual transition
+    if (e.propertyName != "transform") return;
+    this.classList.remove("playing");
+    
+    console.log(this);
+  }
+
+  //adds event listener specifcailly for ends of transitions
+  const keys = document.querySelectorAll(".key");
+  keys.forEach(key => key.addEventListener("transitionend", removeTransition));
 
 </script>
 
