@@ -88,9 +88,17 @@
 
   }
 
-  //adds event listener specifcailly for ends of transitions
+  //adds event listener specifically for ends of transitions
   const keys = document.querySelectorAll(".key");
   keys.forEach(key => key.addEventListener("transitionend", removeTransition));
+
+document.addEventListener('click', function (e) {
+  
+  if (event.target.matches(".key")) {
+    console.log(event.target);
+    fireAudio(e.target);
+  }
+});
 
 </script>
 
